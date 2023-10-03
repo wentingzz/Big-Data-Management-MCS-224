@@ -34,3 +34,60 @@ INSERT INTO DepartmentProjects (department_id, project_id) VALUES (10,
 INSERT INTO DepartmentProjects (department_id, project_id) VALUES (20,
 2);
 
+
+--1
+CREATE TABLE Employee (
+	id int PRIMARY KEY,
+	name varchar(255),
+	email varchar(255),
+	salary int,
+	managerId int,
+	experience_years int
+);
+CREATE TABLE Project (
+	project_id int,
+	employee_id int REFERENCES Employee(id),
+	PRIMARY KEY (project_id, employee_id)
+);
+CREATE TABLE DepartmentProjects (
+	department_id int REFERENCES departments(department_id),
+	project_id int,
+	PRIMARY KEY (department_id, project_id)
+);
+
+--2
+SELECT e.name
+FROM Employee e
+WHERE e.salary > (SELECT AVG(e2.salary) FROM Employee e2);
+
+--3
+SELECT MAX(e.salary)
+FROM Employee e
+WHERE e.salary < (SELECT MAX(e2.salary) FROM Employee e2);
+
+--4
+CREATE INDEX idx_salary ON Employee using Btree (salary);
+
+--5
+SELECT e.email
+FROM Employee e
+GROUP BY e.email
+HAVING COUNT(email) > 1;
+
+--6
+SELECT e.*
+FROM Employee e, Employee mng
+WHERE e.managerId = mng.id AND e.salary > mng.salary;
+
+--7
+SELECT p.project_id, AVG(e.experience_years)
+FROM Employee e, Project p
+WHERE e.id = p.employee_id
+GROUP BY p.project_id;
+
+--8
+SELECT e.id, e.name, mng.name, COUNT(p.project_id)
+FROM Employee e
+LEFT JOIN Project p ON e.id = p.employee_id
+INNER JOIN Employee mng ON e.managerId = mng.id
+GROUP BY e.id, mng.name;
