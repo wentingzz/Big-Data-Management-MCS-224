@@ -91,3 +91,53 @@ FROM Employee e
 LEFT JOIN Project p ON e.id = p.employee_id
 INNER JOIN Employee mng ON e.managerId = mng.id
 GROUP BY e.id, mng.name;
+
+--9
+SELECT mng.name
+FROM Employee mng
+JOIN (
+	SELECT e.id, e.managerId
+	FROM Employee e, Project p, DepartmentProjects dp
+	WHERE e.id = p.employee_id AND p.project_id = dp.project_id
+	GROUP BY e.id
+	HAVING COUNT(DISTINCT dp.department_id) > 1
+) AS e2 ON e2.managerId = mng.id;
+
+
+--10
+CREATE TABLE employeeDepts (
+	department_id int REFERENCES departments(department_id),
+	employee_id int REFERENCES Employee(id),
+	PRIMARY KEY (employee_id)
+);
+
+--11
+CREATE TABLE complaints (
+	date_received DATE,
+	product_name VARCHAR(255),
+	issue VARCHAR(255),
+	company VARCHAR(255),
+	state_name VARCHAR(2),
+	zip_code VARCHAR(10),
+	submitted_via VARCHAR(50),
+	date_sent_to_company DATE,
+	company_response VARCHAR(255),
+	timely_response VARCHAR(3),
+	consumer_disputed VARCHAR(3),
+	complaint_id INT
+);
+
+--12
+COPY complaints
+FROM 'C:/Users/Wenting/Downloads/ConsumerComplaints.csv'
+DELIMITER ','
+CSV HEADER;
+
+--13
+SELECT c.product_name, AVG(c.date_sent_to_company-c.date_received) as diff
+FROM complaints c
+GROUP BY c.product_name
+ORDER BY diff DESC;
+
+--14
+CREATE INDEX idx_product_name ON complaints using Btree(product_name);
