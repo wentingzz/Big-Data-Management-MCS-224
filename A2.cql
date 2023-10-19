@@ -17,3 +17,12 @@ SELECT * from emps WHERE name='John Smith';
 CREATE KEYSPACE ks WITH REPLICATION = {'class' : 'SimpleStrategy',
 'replication_factor' : 3};
 
+--1b
+CREATE TABLE trips(trip_id text, call_type text, origin_call int, origin_stand int,
+taxi_id int, timestamp text, day_type text, missing_data boolean, PRIMARY
+KEY(trip_id));
+COPY ks.trips(trip_id, call_type, origin_call, origin_stand, taxi_id, timestamp,
+day_type, missing_data) FROM '/tmp/train_8.csv'
+WITH DELIMITER=',' AND HEADER=TRUE;
+
+
