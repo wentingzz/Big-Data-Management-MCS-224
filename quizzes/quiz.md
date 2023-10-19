@@ -37,3 +37,39 @@ select s.location
 from student s
 where s.location = 'New York'
 ```
+
+
+## Quiz3
+Consider table Persons, with person_ID as the primary key. 
+
+| person_ID |   name   |
+|-----------|----------|
+|   1223    |   Mark   |
+|   1567    |  Alison  |
+|   1965    |   Sara   |
+|   1211    | Jasmine  |
+|   1223    |   John   |
+- The following instance is not legal because of duplicate primary key.
+- (False)All indexes must be created before we insert any records into the tables.
+- (False) An index-only execution is only possible using clustered indexes.
+- Defining too many transactions in an application can slow down the application.
+- Write a SQL query to show the list of names along with the number of time each name appears in the table. That is, the returned table should have columns (name, numStudentsWithThisName). 
+```sql
+select p.name, COUNT(*) 
+from Persons p
+group by p.name
+```
+- Write a query to return the names of students who have taken both 'BANA 295' and 'CS 122A'.
+```sql
+select s.name
+from students s, grades g1, grades g2
+where s.name = g1.name AND s.name = g2.name AND g1.class = 'BANA 295' AND g2.class = 'CS 122A'
+```
+- A hash index on Person_ID would not be useful because it's a range query.
+```sql
+SELECT * 
+FROM Persons
+WHERE Person_ID>1500
+```
+
+
