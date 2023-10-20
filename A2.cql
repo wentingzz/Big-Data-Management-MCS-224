@@ -29,4 +29,7 @@ WITH DELIMITER=',' AND HEADER=TRUE;
 CREATE INDEX trips_origin_stand_idx ON trips(origin_stand);
 SELECT COUNT(*) FROM trips WHERE origin_stand = 15;
 
+--1d
+SELECT timestamp FROM trips WHERE trip_id = '1386499486620000068';
+
 
