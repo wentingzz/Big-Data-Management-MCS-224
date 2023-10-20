@@ -25,4 +25,8 @@ COPY ks.trips(trip_id, call_type, origin_call, origin_stand, taxi_id, timestamp,
 day_type, missing_data) FROM '/tmp/train_8.csv'
 WITH DELIMITER=',' AND HEADER=TRUE;
 
+--1c
+CREATE INDEX trips_origin_stand_idx ON trips(origin_stand);
+SELECT COUNT(*) FROM trips WHERE origin_stand = 15;
+
 
