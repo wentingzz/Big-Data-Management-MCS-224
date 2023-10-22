@@ -32,4 +32,7 @@ SELECT COUNT(*) FROM trips WHERE origin_stand = 15;
 --1d
 SELECT timestamp FROM trips WHERE trip_id = '1386499486620000068';
 
+--1e
+SELECT trip_id FROM trips WHERE origin_stand = 15 AND call_type = 'B'
+ALLOW FILTERING;
 
