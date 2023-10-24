@@ -72,4 +72,12 @@ FROM Persons
 WHERE Person_ID>1500
 ```
 
+## Quiz4
+- Vertical scaling can be achieved by hardware upgrade (e.g. faster CPU).
+- Social media data is not as critical as other data so social media platforms do not need to carry the burden of enforcing a strict level of consistency.
+- The CAP theorem states that no database system can have ALL of the following properties: consistency, availability and partition tolerance.
+- Replication can help to increase the query throughput of a database, that is,  increase the number of answered queries per second.
+- The ring topology in Cassandra is used to support both replication and sharding.
+- Cassandra is good if you want the fastest possible key-value retrieval.
+- MongoDB is the best if you have to store and query a collection of complex (i.e. with nesting) JSONs.
 
