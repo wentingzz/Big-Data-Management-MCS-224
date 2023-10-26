@@ -26,3 +26,9 @@
 //"location": "Irvine",
 //"user": {"username": "bob123" }
 //}]
+
+
+//1c
+db.tweets.find({"user.username":"bob123", location:"Irvine"}, {id : 1, _id : 0})
+//1d
+db.tweets.count({location:"Irvine"})
