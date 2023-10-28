@@ -32,3 +32,23 @@
 db.tweets.find({"user.username":"bob123", location:"Irvine"}, {id : 1, _id : 0})
 //1d
 db.tweets.count({location:"Irvine"})
+
+//2b
+db.ts.find({"data.entities.hashtags": {
+	$elemMatch: {
+	tag: "weather"
+	}
+}}, {"data.text": 1})
+
+//2c
+db.ts.aggregate([
+	{"$group": {
+		_id: "$data.author_id",
+		count: {$sum: 1}
+	}},
+	{$sort:{
+		count: -1
+	}},
+	{$limit: 10}
+]);
+
