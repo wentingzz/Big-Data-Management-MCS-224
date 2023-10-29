@@ -52,3 +52,26 @@ db.ts.aggregate([
 	{$limit: 10}
 ]);
 
+//2d
+db.ts.aggregate([
+	{$unwind: "$includes.users"},
+	{
+		$match: {
+			$expr: {
+				$eq: ["$data.author_id", "$includes.users.id"]
+			}
+		}
+	},
+	{
+		$group: {
+			_id: "$data.author_id",
+			followers_count: {$first: "$includes.users.public_metrics.followers_count"}
+		}
+	},
+	{
+		$group: {
+			_id: null,
+			avgFollowers: {$avg: "$followers_count"}
+		}
+	}
+])
