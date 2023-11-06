@@ -81,3 +81,10 @@ WHERE Person_ID>1500
 - Cassandra is good if you want the fastest possible key-value retrieval.
 - MongoDB is the best if you have to store and query a collection of complex (i.e. with nesting) JSONs.
 
+## Quiz5
+- Index-free adjacency means that to get the neighbors of a node we traverse pointers instead of using an index.
+- (False) MySQL uses LSM storage.
+- (False) Assume that we insert (key,value): (123,'Bob') to an LSM tree in a system like LevelDB. If we later insert (123,'Alice'), the insertion will be delayed until we find the previous occurrence of key 123 to update it.
+- When compacting two SSTables of 1 GB each, the resulting SSTable may be less than 2 GB.
+- Bloom filters are useful for membership queries where the exact element is being checked for membership in a set.
+- To decrease the false positive probability of a Bloom filter, we must increase its length.
