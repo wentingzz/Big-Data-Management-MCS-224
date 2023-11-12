@@ -1,0 +1,22 @@
+function Map(doc):
+	result = {}
+	for(word1 in doc):
+		for(word2 in doc):
+			if(word1 != word2 && (word1, word2) not in result && (word2, word1) not in result:
+				result[(word1, word2)] = 1
+	return result
+
+function Reduce(results):
+	res = {}
+	for(result in results):
+		for(key, value in result):
+			if(key in res):
+				res[key] += value
+			else if (swap(key) in res):
+				res[swap(key)] += value
+			else:
+				res[key] = value
+	for(key, value in res)
+		if value < 100:
+			delete key in res
+	return res
