@@ -20,3 +20,21 @@ function Reduce(results):
 		if value < 100:
 			delete key in res
 	return res
+
+
+//2c
+function Combiner(results):
+	res = {}
+	for(result in results):
+		for(key, value in result):
+			if(key in res):
+				res[key] += value
+			else:
+				res[key] = value
+
+function Reduce(results):
+	res = {}
+	for(key, value in results)
+		if value > 100:
+			res[key] = value
+	return res
