@@ -88,3 +88,16 @@ WHERE Person_ID>1500
 - When compacting two SSTables of 1 GB each, the resulting SSTable may be less than 2 GB.
 - Bloom filters are useful for membership queries where the exact element is being checked for membership in a set.
 - To decrease the false positive probability of a Bloom filter, we must increase its length.
+
+## Quiz6
+- Spark is usually faster that MapReduce if the servers of the cluster have large memories.
+- (False) MapReduce must be installed on a cluster with shared memory (i.e. servers share the same RAM, instead of each having its own memory)
+- All pairs output by mappers that have the same key are input to the same reducer
+- MapReduce and Spark are generally used for expensive jobs, that is, we would not use them to find the name of a student with studentid=1234, as they have significant overhead in executing.
+- Shuffling is generally the most expensive operation in MapReduce.
+- Shuffling in MapReduce is similar to group by in SQL.
+- (False) When a server dies during a long MapReduce job, the job starts from the beginning.
+- (False) Pig and Hive require to first install Spark.
+- A distributed file system logically behaves like a local file system, but physically runs on several servers and stores files on several drives.
+- Spark and MapReduce typically read from HDFS (or another distributed file system) so they can read data in parallel from multiple physical drives.
+
