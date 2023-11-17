@@ -4,6 +4,10 @@
 2. NoSQL & Cassandra Project
 3. MongoDB Project
 
+4. Neo4j & MapReduce
+
+5. 
+
 MySQL is suitable for banking because it provides ACID transactions and high
 consistency.
 Cassandra is suitable for a logging system, where the logs can be clustered and stored
@@ -12,3 +16,4 @@ log files. Cassandra uses key-value strategy, which will be efficient to find th
 date.
 MongoDB is suitable for a content-rich application, like blog or social media. It provides
 more flexibility, such as filtering and data structure, which meets diverse content types
+
