@@ -101,3 +101,32 @@ WHERE Person_ID>1500
 - A distributed file system logically behaves like a local file system, but physically runs on several servers and stores files on several drives.
 - Spark and MapReduce typically read from HDFS (or another distributed file system) so they can read data in parallel from multiple physical drives.
 
+## Quiz7
+Suppose the input is a list of rows with format (tweetid, text, userid, retweets). For example:
+```
+123, "hey UCI", bob1, 12
+234, "play UCI", alice2, 0
+```
+- If you want to count the total number of retweets for each user, the (key,value) pair should be (userid,retweets). 
+- If each mapper inputs a group of rows (e.g. 1000), to minimize the shuffling cost in MapReduce, the mapper's output should be after processing all rows emit (userid, sum-of-retweets) pairs 
+- It is not a good idea to run MapReduce to answer each Web search query.
+- (False) Spark can edit an existing RDD to create a new RDD, so it does not have to create a new RDD from scratch.
+- The MapReduce mapper is most similar to Spark's flatMap.
+- The reducer in MapReduce is most similar to Spark's reduceByKey.
+
+Spark 
+```
+errors = lines.filter(lambda s: s.startswith(“ERROR”))
+```
+- Both errors and lines are RDDs.
+- (False) To handle failures, Spark stores all RDDs on HDFS, which replicates file data blocks.
+
+Consider the following code
+```
+x = sc.parallelize(["spark rdd example", "sample example"])
+```
+Write pyspark code to count the total number of words in x (the answer should be 5).
+```
+total_words = x.flatMap(lambda line: line.split(" ")).count()
+```
+
