@@ -16,3 +16,9 @@ fm.createOrReplaceTempView("tmp1")
 spark.sql("SELECT SUM(vote_average * vote_count)/SUM(vote_count) FROM tmp1").show()
 # 2b
 df.withColumn('word', F.explode(F.split(F.regexp_replace(F.lower(F.col('overview')), '[^a-zA-Z0-9\\s]', ''), ' '))).groupBy('word').count()
+# 2c
+df_words = df.select("title", "vote_average").withColumn("word", F.explode(F.split(F.col("title"), " "))).groupBy("word").agg(F.avg("vote_average").alias("score"), F.count("title").alias("title_count"))
+df_10_titles = df_words.filter("title_count >= 10")
+top_words = df_10_titles.orderBy(F.col("score").desc()).show(10)
+
+
