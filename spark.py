@@ -1,3 +1,4 @@
+from pyspark.sql.functions import input_file_name, expr
 # 1a
 df = spark.read.format("csv").option("header", "true").load("/FileStore/tables/test.csv")
 # 1b
@@ -20,5 +21,5 @@ df.withColumn('word', F.explode(F.split(F.regexp_replace(F.lower(F.col('overview
 df_words = df.select("title", "vote_average").withColumn("word", F.explode(F.split(F.col("title"), " "))).groupBy("word").agg(F.avg("vote_average").alias("score"), F.count("title").alias("title_count"))
 df_10_titles = df_words.filter("title_count >= 10")
 top_words = df_10_titles.orderBy(F.col("score").desc()).show(10)
-
-
+# 2d
+df = spark.read.format("csv").option("header", "true").option("quote", "\"").option("escape", "\"").load("dbfs:/FileStore/new/*.csv").withColumn("movie_name", expr("regexp_replace(substring(split(substring_index(input_file_name(), '/', -1), '.csv')[0], 1, len(substring_index(input_file_name(), '/', -1)) - 9), '_', ' ') ")).withColumn("year", expr("substring(split(substring_index(input_file_name(), '/', -1), '.csv')[0], -4)"))
