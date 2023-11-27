@@ -23,3 +23,14 @@ df_10_titles = df_words.filter("title_count >= 10")
 top_words = df_10_titles.orderBy(F.col("score").desc()).show(10)
 # 2d
 df = spark.read.format("csv").option("header", "true").option("quote", "\"").option("escape", "\"").load("dbfs:/FileStore/new/*.csv").withColumn("movie_name", expr("regexp_replace(substring(split(substring_index(input_file_name(), '/', -1), '.csv')[0], 1, len(substring_index(input_file_name(), '/', -1)) - 9), '_', ' ') ")).withColumn("year", expr("substring(split(substring_index(input_file_name(), '/', -1), '.csv')[0], -4)"))
+# 2e
+df.filter(df.movie_name == 'The Caine Mutiny').select("title", "review").show(10)
+# 2f
+# Write pyspark to count the number of movies that appear in both datasets. Match using title (exact match, case insensitive) and year.
+#df0 contains the first dataset, df contains the second
+df0 = df0.withColumn("year", F.substring(F.col("release_date"), 1, 4))
+df0_movies = df0.select("title", "year").distinct()
+df_movies = df.select("movie_name", "year").distinct()
+df_movies.show(10)
+common_movies = df0_movies.join(df_movies, (F.lower(df0_movies["title"]) == F.lower(df_movies["movie_name"])) & (df0_movies["year"] == df_movies["year"]), "inner" )
+print(common_movies.count())
