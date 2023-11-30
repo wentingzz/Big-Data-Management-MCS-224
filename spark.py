@@ -34,3 +34,9 @@ df_movies = df.select("movie_name", "year").distinct()
 df_movies.show(10)
 common_movies = df0_movies.join(df_movies, (F.lower(df0_movies["title"]) == F.lower(df_movies["movie_name"])) & (df0_movies["year"] == df_movies["year"]), "inner" )
 print(common_movies.count())
+# 2g
+grouped = df.groupBy("movie_name").agg(F.mean("rating").alias("avg_rating"), F.count("rating").alias("review_count"))
+grouped.filter("review_count >= 100").orderBy("avg_rating", ascending=False).show(20)
+# 2h
+grouped = df.groupBy("username").agg(F.count("rating").alias("review_count"))
+grouped.orderBy("review_count", ascending=False).show(20)
