@@ -130,3 +130,27 @@ Write pyspark code to count the total number of words in x (the answer should be
 total_words = x.flatMap(lambda line: line.split(" ")).count()
 ```
 
+## Quiz8
+- SparkSQL can express fewer complex queries than Core Spark.
+- To execute an SQL query on a Dataframe, we must first create a View on it.
+- (False) A benefit of lazy execution in Spark is that it facilitates replication.
+- Consider pyspark program, Spark will execute the filtering condition after line 2
+```
+rev = messages.filter(lambda s: s.startswith('reverse'));
+rev.take(10);
+```
+- Consider text file:
+```commandline
+UCI, play, UCI
+UCLA, UCI, cook
+play, UCLA
+```
+Write pyspark code to return the words that appear at least 2 times across all lines.
+In the above example, the output would be {UCI, play, UCLA}, as they appear 3, 2 and 2 times, respectively.
+```
+df = sc.textFile(“file.txt”)
+flat_df = df.flatMap(lambda x: x.split(' ')
+count = flat_df.map(lambda word: (word, 1)).reduceByKey(lambda x, y: x + y)
+result = count.filter(lambda x: x[1] > 1)
+result.show() 
+```
