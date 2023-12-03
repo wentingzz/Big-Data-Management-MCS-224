@@ -6,7 +6,7 @@
 
 4. Neo4j & MapReduce
 
-5. 
+5. Spark
 
 MySQL is suitable for banking because it provides ACID transactions and high
 consistency.
