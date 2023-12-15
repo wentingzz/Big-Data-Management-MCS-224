@@ -1,19 +1,24 @@
-# Big-Data-Management-MCS-224
+# Big Data Management MCS224
 
-1. MSQL
-2. NoSQL & Cassandra Project
-3. MongoDB Project
+This repository contains the code files for the following course projects. Each project has a corresponding GitHub issue that contains detailed requirements and installation guides. Click on the links above to access the respective issues.
 
-4. Neo4j & MapReduce
+1. **MSQL**
+   - **Code File:** `mysql.sql`
+   - **GitHub Issue:** [#1 MSQL Project Issue](https://github.com/wentingzz/Big-Data-Management-MCS-224-/issues/1)
 
-5. Spark
+2. **NoSQL & Cassandra Project**
+   - **Code File:** `cassandra.cql`
+   - **GitHub Issue:** [#2 NoSQL & Cassandra Project Issue](https://github.com/wentingzz/Big-Data-Management-MCS-224-/issues/2)
 
-MySQL is suitable for banking because it provides ACID transactions and high
-consistency.
-Cassandra is suitable for a logging system, where the logs can be clustered and stored
-based on data and user_id. This is because we usually use date and user_id to identify
-log files. Cassandra uses key-value strategy, which will be efficient to find the log by
-date.
-MongoDB is suitable for a content-rich application, like blog or social media. It provides
-more flexibility, such as filtering and data structure, which meets diverse content types
+3. **MongoDB Project**
+   - **Code File:** `mongodb.js`
+   - **GitHub Issue:** [#3 MongoDB Project Issue](https://github.com/wentingzz/Big-Data-Management-MCS-224-/issues/3)
+
+4. **Neo4j & MapReduce**
+   - **Code Files:** `neo4j.cyp`, `mapreduce_pseudocode.txt`
+   - **GitHub Issue:** [#4 Neo4j & MapReduce Project Issue](https://github.com/wentingzz/Big-Data-Management-MCS-224-/issues/4)
+
+5. **Spark**
+   - **Code File:** `spark.py`
+   - **GitHub Issue:** [#5 Spark Project Issue](https://github.com/wentingzz/Big-Data-Management-MCS-224-/issues/5)
 
